@@ -18,3 +18,9 @@ AMQP (Advanced Message Queuing Protocol) merupakan protokol komunikasi terbuka y
 ## Simulation slow subscriber
 ![slow](/image/slow.jpeg)
 Disini saya sudah menambahkan delay pada main Publisher sehingga message yang dikirimkan tidak sekaligus, melainkan satu persatu dijeda oleh delay. Lalu, saya menjalankan cargo run pada publisher sebanyak 3 kali, terlihat pada Queued messages cukup tinggi disebabkan pesan yang menumpuk saat menjalankan cargo run 3 kali sekaligus. Pada modul terlihat Queued messagesnya mencapai 20, hal ini kemungkinan menjalankan cargo run secara sekaligus sebanyak 4 kali sehingga messages yang menumpuknya sebanyak 20 message, 1 kali run ada 5 message.
+
+## Running at least three subscribers
+![threesubs](/image/threesubscriber.jpeg)
+Pada test ini, saya mencoba untuk menjalankan tiga subscriber secara bersamaan, dengan cara menjalankan perintah cargo run pada publisher sebanyak 4 kali. Setiap kali publisher dijalankan, publisher mengirimkan 5 event message ke RabbitMQ, yang totalnya menghasilkan 20 message yang dikirim ke broker.
+
+Namun, yang menarik dari percobaan ini adalah tidak terjadi message queue yang terlihat pada RabbitMQ. Ini berarti bahwa setiap message yang dikirim oleh publisher langsung diterima dan diproses oleh ketiga subscriber tersebut tanpa ada backlog atau antrian message yang tertinggal di broker. Hal ini menunjukkan bahwa RabbitMQ berhasil menyalurkan message secara efisien ke ketiga subscriber yang aktif, memungkinkan mereka untuk memproses message secara real-time.
