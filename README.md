@@ -14,3 +14,7 @@ AMQP (Advanced Message Queuing Protocol) merupakan protokol komunikasi terbuka y
 - `guest` (kedua): **password** yang digunakan bersama username untuk autentikasi.
 - `localhost`: alamat server, contohnya tempat RabbitMQ dijalankan. Namun, dalam hal ini, lokal.
 - `5672`: adalah **port default** dari protokol AMQP (digunakan oleh Broker untuk menerima koneksi AMQP).
+
+## Simulation slow subscriber
+![slow](/image/slow.jpeg)
+Disini saya sudah menambahkan delay pada main Publisher sehingga message yang dikirimkan tidak sekaligus, melainkan satu persatu dijeda oleh delay. Lalu, saya menjalankan cargo run pada publisher sebanyak 3 kali, terlihat pada Queued messages cukup tinggi disebabkan pesan yang menumpuk saat menjalankan cargo run 3 kali sekaligus. Pada modul terlihat Queued messagesnya mencapai 20, hal ini kemungkinan menjalankan cargo run secara sekaligus sebanyak 4 kali sehingga messages yang menumpuknya sebanyak 20 message, 1 kali run ada 5 message.
